@@ -24,6 +24,22 @@
     overflow:hidden;
 }
 
+.show {
+    display:block;
+}
+
+.showflex {
+    display:flex;
+}
+
+.hide {
+    display:none;
+}
+
+.txtcenter {
+    text-align: center;
+}
+
 .flexible {
     flex: 1;
 }
@@ -140,16 +156,4 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-}
-
-.show {
-    display:block;
-}
-
-.showflex {
-    display:flex;
-}
-
-.hide {
-    display:none;
 }

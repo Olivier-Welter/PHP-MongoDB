@@ -32,11 +32,18 @@
         
             <section id="main_container" class="flex-wrap">
                 
-                <header>
+                <header class="maxwidth txtcenter">
                     <h1>Trouve ta ville</h1>
                 </header>
                 
-                <div id="result">
+                <form class="maxwidth txtcenter">
+                    <p><input type="text" name="ville" placeholder="Ville"/></p>
+                    <p><input type="text" name="dept" placeholder="Département"/></p>
+                    <p><input type="text" name="region" placeholder="Région"/></p>
+                    <p><input type="submit" name="valider" value="Chercher"/></p>
+                </form>    
+                
+                <div id="result" class="maxwidth">
                     <?php
 
                     $dsn='mongodb://192.168.1.42:27017';
@@ -49,7 +56,7 @@
 
                         $options = [
                             //'projection' => ['_id' => 1, 'nom' => 1],
-                            'limit' => 100
+                            'limit' => 10
                         ];
 
                         $query = new MongoDB\Driver\Query(
@@ -79,7 +86,7 @@
                     ?>
                 </div>
                 
-                <footer>
+                <footer class="maxwidth txtcenter">
                     <p>La modification de la base de données requiert de <a href="#">se connecter</a></p>
                 </footer>
                 
