@@ -58,10 +58,7 @@
         </main>
         
         <!-- END MAIN CONTENT -->
-        
 
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
         
     </body>
     
