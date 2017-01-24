@@ -2,7 +2,7 @@
 // On prolonge la session
 session_start();
 // On teste si la variable de session existe et contient une valeur
-if(($_SESSION['profil'])!=='admin') 
+if(isset($_SESSION['profil']) && ($_SESSION['profil']!=='admin' && $_SESSION['profil']!=='edit' ))
 {
   // Si inexistante ou nulle, on redirige vers le formulaire de login
   header('Location: ./index.php');
