@@ -19,27 +19,22 @@ session_start();
         <?php 
 require_once ('config_db_inc.php');
 	  
-/*if (isset($_COOKIE['id']))
-    $_SESSION['id']=$_COOKIE['id'];
-        
-        setcookie("id",  $_POST['id'], time()+36000); */
-        
-// Click sur déconnexion 
-if (isset($_POST['fin_session'])) {
-  print ("<h2 class=\"destroy\">Déconnexion </h2>");
-  printf("<h3><a href=\"%s\">Se reconnecter</a></h3>", $_SERVER["SCRIPT_NAME"]);
-  session_destroy();
-  exit();
-}
- 
         
 echo '<main class="maxsize flexible flex-column-center"><section id="main_container" class="flex-column">';
         
 print ('<form action="" method="post"><fieldset><legend>Authentification</legend>');
     
+        
+// Click sur déconnexion 
+if (isset($_POST['fin_session'])) {
+  print ("<h2>Vous êtes déconnecté de votre session</h2>");
+  session_destroy();
+  
+}
+  // Si le formulaire à été soumis      
   if (isset($_POST['id']))
   {
-    
+    // Requétage pour vérification des données
     $filter=[];
     $options=[];
     $requete=new MongoDB\Driver\Query($filter,$options);
@@ -53,11 +48,12 @@ print ('<form action="" method="post"><fieldset><legend>Authentification</legend
             $ok= 1;
             if ($_POST['mdp'] == $docu->mdp)
                 {
+                // Connexion valide, création des cariables sessions
                 echo '<br>Bienvenue  '.$docu->identifiant.', vous êtes connecté en tant que '.$docu->profil.'.</br>';
                 $_SESSION['mdp'] = $_POST['mdp'];
                 $_SESSION['profil'] = $docu->profil;
-                echo "<a href= 'index.php'>Accès à l'accueil </a><br>";
-                echo "<a href= 'maintenance.php'>Accès à la maintenance</a><br>";
+                echo "Accès à l'<a href= 'index.php'>accueil </a><br>";
+                echo "Accès à la <a href= 'maintenance.php'>maintenance</a><br>";
                 print('<input type="submit" name="fin_session" value="Déconnexion" /></p>');
                 exit();
                 }
@@ -72,8 +68,8 @@ elseif (!isset($_SESSION['id'])) { $_SESSION['id'] = ''; $_SESSION['mdp'] =''; }
       
 printf('<label>Identifiant : <input type="text" name="id" value="%s"/></label>', $_SESSION['id']);
 printf('<label>Mot de passe : <input type="text" name="mdp" value="%s"/></label>', $_SESSION['mdp']);
-print('<p><input type="submit" value="Connexion" />');
-print('<input type="submit" name="fin_session" value="Déconnexion" /></p>');
+print('<p><input type="submit" value="Connexion" /><br>');
+echo "Retour à l'<a href= 'index.php'>accueil </a><br>";
 print("</fieldset></form>");
 echo "</section></main>";
         
