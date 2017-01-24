@@ -50,7 +50,7 @@
                 </div>
                 
                 <footer class="maxwidth txtcenter">
-                    <p>La modification de la base de données requiert de <a href="session.php">se connecter</a></p>
+                    <p>La modification de la base de données requiert de <a href="authentification.php">se connecter</a></p>
                 </footer>
                 
             </section>
