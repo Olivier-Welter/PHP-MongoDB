@@ -18,7 +18,7 @@
         
     </head>
     
-    <body class="abs reset maxsize flex-column">
+    <body id="background" class="abs reset maxsize flex-column">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -57,14 +57,17 @@
 
 			(function() {
 				var movementStrength = 25;
-				var height = movementStrength / $(window).height();
-				var width = movementStrength / $(window).width();
-				$("#top-image").mousemove(function(e){
-						  var pageX = e.pageX - ($(window).width() / 2);
-						  var pageY = e.pageY - ($(window).height() / 2);
-						  var newvalueX = width * pageX * -1 - 25;
-						  var newvalueY = height * pageY * -1 - 50;
-						  $('#top-image').css("background-position", newvalueX+"px     "+newvalueY+"px");
+				var height = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				var width = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				height = movementStrength / height;
+				width = movementStrength / width;
+				var body = document.getElementById("background");
+				body.addEventListener("mousemove", function(e) {
+						  var pageX = e.pageX - (width / 2);
+						  var pageY = e.pageY - (height / 2);
+						  var newvalueX = width * pageX * -1 -25;
+						  var newvalueY = height * pageY * -1 -50;
+						  body.style.backgroundPosition = newvalueX+"px "+newvalueY+"px";
 				});
 			})();
 
