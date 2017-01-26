@@ -22,7 +22,7 @@ try {
 				];
 				$filter = ['nom' => new MongoDB\BSON\Regex("$region","i")];
 				$query = new MongoDB\Driver\Query($filter,$options);
-				$curs = $mgc->executeQuery('geo_france.regions', $query);
+				$curs = $cnx->executeQuery('geo_france.regions', $query);
 				$cursArray = $curs->toArray();
 
 				if(count($cursArray) != 1) {
@@ -49,7 +49,7 @@ try {
 				];
 				$filter = ['nom' => new MongoDB\BSON\Regex("$dept","i")];
 				$query = new MongoDB\Driver\Query($filter,$options);
-				$curs = $mgc->executeQuery('geo_france.departements', $query);
+				$curs = $cnx->executeQuery('geo_france.departements', $query);
 				$cursArray = $curs->toArray();
 
 				if(count($cursArray) > 3 || count($cursArray) < 1) {
@@ -74,7 +74,7 @@ try {
 
 			$query = new MongoDB\Driver\Query($filter,$options);
 
-			$curs = $mgc->executeQuery('geo_france.villes', $query);
+			$curs = $cnx->executeQuery('geo_france.villes', $query);
 				
 			$cursArray = $curs->toArray();
 			

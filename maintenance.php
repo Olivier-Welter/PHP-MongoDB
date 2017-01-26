@@ -80,7 +80,7 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
 				];
 				$filter = ['nom' => new MongoDB\BSON\Regex("^$region","i")];
 				$query = new MongoDB\Driver\Query($filter,$options);
-				$curs = $mgc->executeQuery('geo_france.regions', $query);
+				$curs = $cnx->executeQuery('geo_france.regions', $query);
 				$cursArray = $curs->toArray();
 				if(count($cursArray) != 1) {
 					$region = false;
@@ -101,7 +101,7 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
 				];
 				$filter = ['nom' => new MongoDB\BSON\Regex("^$dept","i")];
 				$query = new MongoDB\Driver\Query($filter,$options);
-				$curs = $mgc->executeQuery('geo_france.departements', $query);
+				$curs = $cnx->executeQuery('geo_france.departements', $query);
 				$cursArray = $curs->toArray();
 				if(count($cursArray) > 3 || count($cursArray) < 1) {
 					$dept = false;
@@ -119,7 +119,7 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
 			];
 			$filter = ['nom' => new MongoDB\BSON\Regex("^$ville","i")];
 			$query = new MongoDB\Driver\Query($filter,$options);
-			$curs = $mgc->executeQuery('geo_france.villes', $query);
+			$curs = $cnx->executeQuery('geo_france.villes', $query);
 				
 			$cursArray = $curs->toArray();
 			
@@ -167,7 +167,7 @@ catch (Exception $e) { echo "exception interceptée :".$e->getMessage();}
             			$options = [];
 			$filter = ['_id' => $ville];
 			$query = new MongoDB\Driver\Query($filter,$options);
-			$curs = $mgc->executeQuery('geo_france.villes', $query);
+			$curs = $cnx->executeQuery('geo_france.villes', $query);
      
             echo "<pre>";
             print_r ($curs);
