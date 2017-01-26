@@ -62,7 +62,7 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
 
                 <?php
                 //AFFICHER VILLE
-    require_once("php/db.php");
+    require_once("config_db_inc.php");
     try {
     
     if(isset($_POST["recherche"])&&$_POST["recherche"]=="Chercher") {
