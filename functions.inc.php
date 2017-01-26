@@ -76,7 +76,6 @@ EOSVGH;
 	 			 
 			 foreach($ligne as $docu)
 				{
-					 echo '<br>ville:'.$docu->nom.' latitude: '.$docu->lat.' long:'.$docu->lon.' depart:'.$docu->_id_dept;
 					 
 					 $f2=['_id' => $docu->_id_dept];
 					 $depart=$docu->_id_dept;
@@ -86,7 +85,6 @@ EOSVGH;
 					 
 					 foreach($ligne2 as $result)
 						{
-							 echo ' Nom depart: '.$result->nom;
 							 $ndepart=$result->nom;
 						}
 					 
