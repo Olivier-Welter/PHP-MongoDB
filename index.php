@@ -28,7 +28,7 @@
 
         <!-- START MAIN CONTENT -->
         
-        <main class="maxsize flexible flex-column-center">
+        <main class="maxsize flexible flex-column-start">
         
             <section id="main_container" class="flex-column">
                 

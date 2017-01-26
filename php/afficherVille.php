@@ -20,7 +20,7 @@ try {
 					'sort' => ['nom' => 1],
 					'limit' => 3
 				];
-				$filter = ['nom' => new MongoDB\BSON\Regex("^$region","i")];
+				$filter = ['nom' => new MongoDB\BSON\Regex("$region","i")];
 				$query = new MongoDB\Driver\Query($filter,$options);
 				$curs = $mgc->executeQuery('geo_france.regions', $query);
 				$cursArray = $curs->toArray();
@@ -47,7 +47,7 @@ try {
 					'sort' => ['nom' => 1],
 					'limit' => 3
 				];
-				$filter = ['nom' => new MongoDB\BSON\Regex("^$dept","i")];
+				$filter = ['nom' => new MongoDB\BSON\Regex("$dept","i")];
 				$query = new MongoDB\Driver\Query($filter,$options);
 				$curs = $mgc->executeQuery('geo_france.departements', $query);
 				$cursArray = $curs->toArray();
@@ -70,7 +70,7 @@ try {
 				'limit' => 10
 			];
 
-			$filter = ['nom' => new MongoDB\BSON\Regex("^$ville","i")];
+			$filter = ['nom' => new MongoDB\BSON\Regex("$ville","i")];
 
 			$query = new MongoDB\Driver\Query($filter,$options);
 
@@ -84,7 +84,7 @@ try {
 		
 				foreach($cursArray as $doc) {
 				    echo "<p class='txtcenter'>";
-				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a> ".$doc->pop." habitants.";
+				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a> - ".$doc->pop." habitants.";
 				    echo "</p>";
 				}
 
@@ -95,7 +95,7 @@ try {
 
 				foreach($cursArray as $doc) {
 				    echo "<p class='txtcenter'>";
-				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a> ".$doc->pop." habitants.";
+				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a> - ".$doc->pop." habitants.";
 				    echo "</p>";
 				}
 

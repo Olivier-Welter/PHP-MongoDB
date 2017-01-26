@@ -1,6 +1,6 @@
 <?php
 
-$dsn='mongodb://localhost:27017';
+$dsn='mongodb://192.168.1.42:27017';
 $dbname = 'geo_france';
 $collname = 'villes';
 
