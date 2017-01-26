@@ -82,7 +82,7 @@ form label {
     display:flex;
 }
 
-#main_container p {
+#main_container p, #main_container h3 {
     text-align: center;
 }
 

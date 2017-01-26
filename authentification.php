@@ -24,7 +24,7 @@ session_start();
 
     </head>
 
-    <body class="abs reset maxsize flex-column">
+    <body id="background" class="abs reset maxsize flex-column">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -50,30 +50,27 @@ session_start();
 							$requete=new MongoDB\Driver\Query($filter,$options);
 							$ligne=$cnx->executeQuery('geo_france.users',$requete);
 							$ok =0;
-							foreach($ligne as $docu)
-								{
-								if ($_POST['id'] == $docu->identifiant)
-									{
+							foreach($ligne as $docu) {
+								if ($_POST['id'] == $docu->identifiant) {
 									$_SESSION['id'] = $_POST['id'];
 									$ok= 1;
-									if ($_POST['mdp'] == $docu->mdp)
-										{
-										// Connexion valide, création des cariables sessions
-										echo '<p>Bienvenue  '.$docu->identifiant.', vous êtes connecté en tant que '.$docu->profil.'.</p>';
-										$_SESSION['mdp'] = $_POST['mdp'];
-										$_SESSION['profil'] = $docu->profil;
-										echo "<p>Accès à l'<a href= 'index.php'>accueil </a></p>";
-										echo "<p>Accès à la <a href= 'maintenance.php'>maintenance</a></p>";
-                                        echo "<p><a href= 'authentification.php?deco'>Déconnexion</a></p>";
-										exit();
-										}
-										else echo "<br>Erreur de mot de passe<br>";
+									if ($_POST['mdp'] == $docu->mdp) {
+											// Connexion valide, création des cariables sessions
+											echo '<p>Bienvenue  '.$docu->identifiant.', vous êtes connecté en tant que '.$docu->profil.'.</p>';
+											$_SESSION['mdp'] = $_POST['mdp'];
+											$_SESSION['profil'] = $docu->profil;
+											echo "<p>Accès à l'<a href= 'index.php'>accueil </a></p>";
+											echo "<p>Accès à la <a href= 'maintenance.php'>maintenance</a></p>";
+											echo "<p><a href= 'authentification.php?deco'>Déconnexion</a></p>";
+											exit();
 									}
+									else echo "<br>Erreur de mot de passe<br>";
+
 								}
 								if ($ok==0)
 								  echo "<br>Erreur d'idendifiant.<br>";
-						  }
-  
+							}
+						}
 						elseif (!isset($_SESSION['id'])) { $_SESSION['id'] = ''; $_SESSION['mdp'] =''; }
       
 						printf('<p><label class="maxwidth flex-around"><span>Identifiant : </span><input type="text" name="id" value="%s"/></label></p>', $_SESSION['id']);
@@ -81,7 +78,7 @@ session_start();
 					?>
 
                             <p>
-                                <input type="submit" value="Connexion" />
+                                <input type="submit" value="Connexion"/>
                             </p>
                             <a href='index.php'>Accueil </a>
                     </fieldset>
@@ -91,6 +88,25 @@ session_start();
             </section>
 
         </main>
+
+		<script>
+			(function() {
+				var movementStrength = 25;
+				var height = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				var width = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				height = movementStrength / height;
+				width = movementStrength / width;
+				var body = document.getElementById("background");
+				body.addEventListener("mousemove", function(e) {
+						  var pageX = e.pageX - (width / 2);
+						  var pageY = e.pageY - (height / 2);
+						  var newvalueX = width * pageX * -1 -25;
+						  var newvalueY = height * pageY * -1 -50;
+						  body.style.backgroundPosition = newvalueX+"px "+newvalueY+"px";
+				});
+			})();
+
+		</script>
 
     </body>
 
