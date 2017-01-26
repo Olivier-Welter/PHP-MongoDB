@@ -8,6 +8,9 @@ if(!isset($_SESSION['profil']) || ($_SESSION['profil']!='admin' && $_SESSION['pr
  header('Location: ./index.php',TRUE,303);
  exit();
 }
+if (isset($_GET['deco']))
+            {session_destroy();
+             header('Location: ./index.php');}
 ?>
     <html>
 
@@ -274,7 +277,7 @@ echo "<a href= 'maintenance.php'>Nouvelle recherche</a><br>";
 echo '</div>';
       
 echo "Accès à l'<a href= 'index.php'>accueil</a><br>";
-print('<input type="submit" name="fin_session" value="Déconnexion" /></p>'); 
+echo "<p><a href= 'index.php?deco'>Déconnexion</a></p>";
 print("</fieldset></form>");
 echo "</section></main>";     
 ?>
