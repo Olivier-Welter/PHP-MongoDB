@@ -14,6 +14,12 @@
     height: 100%;
 }
 
+.flex-around {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -69,6 +75,10 @@ h1 {
 
 form input {
     color: black;
+}
+
+form label {
+    display:flex;
 }
 
 #main_container p {
