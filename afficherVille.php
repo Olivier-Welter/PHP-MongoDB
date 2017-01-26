@@ -108,6 +108,6 @@ try {
 	}
 
 }
-catch (Exception $e) { echo "exception interceptée :".$e->getMessage();}
+catch (MongoDB\Driver\Exception $e) { echo "exception interceptée :".$e->getMessage();}
 
 ?>

@@ -162,6 +162,8 @@ catch (Exception $e) { echo "exception interceptée :".$e->getMessage();}
         
     
             echo "TAAAAAAAAAAAAAAAAAAA MERE LA CHIENNE";
+
+			echo "Tu te calme Denis !";
      
             $ville = trim($_GET["Ville"]);
             			$options = [];
