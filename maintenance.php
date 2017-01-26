@@ -173,24 +173,29 @@ if (isset($_GET['Ville'])) {
             
 
         // \AFFICHER VILLE
-if (isset($_POST['update'])) {
-  print ("<h2>Modif ok</h2>");
- 
+if (isset($_POST['update'])) 
+	{
+		 print ("<h2>Modif ok</h2>");
+		 
+		 try 
+			{
+				 $bulk = new MongoDB\Driver\BulkWrite;
+				 $bulk->update(
+						['_id' => $ville],
+						['$set' => ['pop' => $_POST['pop'], 'cp'=> $_POST['cp']]],
+						['multi' => false, 'upsert' => false]
+					);
+				 //// OMFG    
+				 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+				 $result = $cnx->executeBulkWrite('geo_france.villes', $bulk, $writeConcern);
+				 // ERREUR KK 
+			}
+		 catch (MongoDB\Driver\Exception $ex)
+		 {
+						 die('Erreur de connexion au serveur MongoDB '.$ex->getMessage());
+		 }
 
-$bulk = new MongoDB\Driver\BulkWrite;
-$bulk->update(
-    ['_id' => $ville],
-    ['$set' => ['pop' => $_POST['pop'], 'cp'=> $_POST['cp']]],
-    ['multi' => false, 'upsert' => false]
-);
-//// OMFG    
-$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-$result = $cnx->executeBulkWrite('geo_france.villes', $bulk, $writeConcern);
-// ERREUR KK 
-
-
-  
-}
+	}
        echo '</div>';
         
       
