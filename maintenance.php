@@ -224,16 +224,6 @@ elseif ((isset($_GET['Ville'])) && (!isset($_POST['update']))) {
                     printf ('<input type="hidden" name="nom" value="%s"/>', $doc->nom);
                     printf ('<label>Population : <input type="text" name="pop" value="%s"/></label></p>', $doc->pop);
                     printf ('<p><label>Code postal : <input type="text" name="cp" value="%s"/></label></p>', $doc->cp); 
-                   /* $cplist = explode("-", $doc->cp);
-					$selected = '';
-				    print ("CP : ");
-					echo '<select name="Code postal">',"n";
-					foreach($cplist as $valeurHexadecimale => $nomCP)
-						{
-						echo "\t",'<option value="', $valeurHexadecimale ,'"', $selected ,'>', $nomCP ,'</option>',"\n";
-						$selected='';
-						}
-					echo '</select>',"\n";*/
 				    echo "</p>";
 				}
         
@@ -246,7 +236,7 @@ catch (Exception $e) { echo "exception interceptée :".$e->getMessage();}
                   
                 
 if (isset($_POST['update'])) {
-    print ("<h2>Modification effectué pour ".$_POST['nom']."</h2>");
+    print ("<h2>Modification effectuée pour ".$_POST['nom']."</h2>");
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->update(
             ['_id' => floor($_POST['id'])],
@@ -254,25 +244,12 @@ if (isset($_POST['update'])) {
             ['multi' => false, 'upsert' => false]
             );
     printf ("La population enregistrée est de %s habitants, le ou les code(s) postal(aux) sont %s.",$_POST['pop'], $_POST['cp']);
-
-    
-  
-$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-$result = $cnx->executeBulkWrite('geo_france.villes', $bulk, $writeConcern);
-
-    
-/*  $command = new MongoDB\Driver\Command([
-        'update' => 'villes',
-        'updates' => [['q'=> ['_id' => 'floor($_POST["id"])'],
-                       'u'=>['$set'=>['pop'=> '$_POST["pop]']]]]
-    ]);
-    $cursor = $cnx->executeCommand('geo_france', $command);
- */   
+    $cnx->executeBulkWrite('geo_france.villes',$bulk);
     
 }
         
             
-echo "<a href= 'maintenance.php'>Nouvelle recherche</a><br>";            
+echo "<p><a href= 'maintenance.php'>Nouvelle recherche</a></p>";            
         }
 echo '</div>';
       
