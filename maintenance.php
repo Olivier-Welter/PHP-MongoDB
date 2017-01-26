@@ -186,7 +186,7 @@ if (isset($_POST['update']))
 						['multi' => false, 'upsert' => false]
 					);
 				 //// OMFG    
-				 $writeConcern = new MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+				 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 				 $result = $cnx->executeBulkWrite('geo_france.villes', $bulk, $writeConcern);
 				 // ERREUR KK 
 			}
