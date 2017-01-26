@@ -1,48 +1,47 @@
 <?php
 session_start();
+   if (isset($_GET['deco']))
+                {session_destroy();
+                header('Location: ./authentification.php');}
 ?>
-<!doctype html>
+    <!doctype html>
 
-<html>
-    
+    <html>
+
     <head>
-        
+
         <meta charset="utf-8">
         <meta name="author" content="Vince | Olive | Trisou | Kéké">
         <meta name="description" content="Projet MongoDB">
         <meta name="keywords" content="Projet MongoDB">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <title>Trouve ta ville</title>
 
         <link rel="icon" href="favicon.ico" />
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/index.css">
-        
+
     </head>
-    
+
     <body class="abs reset maxsize flex-column">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
+
 
         <!-- START MAIN CONTENT -->
-        
+
         <main class="maxsize flexible flex-column-start">
 
-			<section id="main_container" class="flex-column">
-        
-				<form action="" method="post"><fieldset><legend>Authentification</legend>
-    
-					<?php require_once ('config_db_inc.php');
-						// Click sur déconnexion 
-						if (isset($_POST['fin_session'])) {
-						  print ("<h2>Vous êtes déconnecté de votre session</h2>");
-						  session_destroy();
-  
-						}
-						  // Si le formulaire à été soumis      
+            <section id="main_container" class="flex-column">
+
+                <form action="" method="post">
+                    <fieldset>
+                        <legend>Authentification</legend>
+
+                        <?php require_once ('config_db_inc.php'); 
+						// Si le formulaire à été soumis      
 						  if (isset($_POST['id']))
 						  {
 							// Requétage pour vérification des données
@@ -65,7 +64,7 @@ session_start();
 										$_SESSION['profil'] = $docu->profil;
 										echo "<p>Accès à l'<a href= 'index.php'>accueil </a></p>";
 										echo "<p>Accès à la <a href= 'maintenance.php'>maintenance</a></p>";
-										print('<p><input type="submit" name="fin_session" value="Déconnexion" /></p>');
+                                        echo "<p><a href= 'authentification.php?deco'>Déconnexion</a></p>";
 										exit();
 										}
 										else echo "<br>Erreur de mot de passe<br>";
@@ -81,16 +80,18 @@ session_start();
 						printf('<p><label class="maxwidth flex-around"><span>Mot de passe : </span><input type="text" name="mdp" value="%s"/></label></p>', $_SESSION['mdp']);
 					?>
 
-					<p><input type="submit" value="Connexion" /></p>
-					<a href= 'index.php'>Accueil </a>
-					</fieldset>
-					
-				</form>
+                            <p>
+                                <input type="submit" value="Connexion" />
+                            </p>
+                            <a href='index.php'>Accueil </a>
+                    </fieldset>
 
-			</section>
+                </form>
 
-		</main>
+            </section>
+
+        </main>
 
     </body>
 
-</html>
+    </html>
