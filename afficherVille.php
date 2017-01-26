@@ -136,18 +136,20 @@ try {
 		
 				foreach($cursArray as $doc) {
 				    echo "<p>";
-				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a> - ".$doc->pop." habitants.";
+				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a>";
+					if (isset($doc->pop)) echo " - ".$doc->pop." habitants.";
 				    echo "</p>";
 				}
 				echo "</div>";
 			}
-			else if(count($cursArray) > 1){
+			else if(count($cursArray) > 1) {
 				echo "<div>";
 				echo "<h3>Plusieurs villes trouvées :</h3>";
 
 				foreach($cursArray as $doc) {
 				    echo "<p>";
-				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a> - ".$doc->pop." habitants.";
+				    echo "<a href='index.php?Ville=".$doc->_id."&Dept=".$doc->_id_dept."'>".$doc->nom."</a>";
+					if (isset($doc->pop)) echo " - ".$doc->pop." habitants.";
 				    echo "</p>";
 				}
 				echo "</div>";

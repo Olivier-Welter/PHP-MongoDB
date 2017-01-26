@@ -53,7 +53,8 @@
 body {
     position: absolute;
     background-color: bisque;
-    background: url("../img/background.jpg") center fixed no-repeat;
+    background: url("../img/background.jpg") -100px -50px no-repeat;
+    background-size:calc(100% + 200px);
 }
 
 a {
