@@ -44,6 +44,13 @@
                 <div id="result" class="maxwidth">
                     <?php
                         require_once("afficherVille.php");
+						require_once('functions.inc.php');
+						if(isset($_GET['Ville']) && isset($_GET['Dept']))
+						{
+							 $vil=(int) $_GET['Ville'];
+							 $dep=(int) $_GET['Dept'];
+							 affcarte($dep,$vil);
+						}
                     ?>
                 </div>
                 
