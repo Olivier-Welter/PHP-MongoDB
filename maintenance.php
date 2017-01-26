@@ -131,7 +131,16 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
 				    echo "<p class='txtcenter'>";
                     echo "<h3>Propriétés actuelles de $doc->nom :</h3>";
                     printf ('<label>Population : <input type="text" name="id" value="%s"/></label></p>', $doc->pop);
-                    printf ('<p><label>Code postal : <input type="text" name="id" value="%s"/></label></p>', $doc->cp); 
+                    $cplist = explode("-", $doc->cp);
+					$selected = '';
+				    print ("CP : ");
+					echo '<select name="Code postal">',"n";
+					foreach($cplist as $valeurHexadecimale => $nomCP)
+						{
+						echo "\t",'<option value="', $valeurHexadecimale ,'"', $selected ,'>', $nomCP ,'</option>',"\n";
+						$selected='';
+						}
+					echo '</select>',"\n";
 				    echo "</p>";
 				}
 			}
@@ -166,12 +175,20 @@ if (isset($_GET['Ville'])) {
 				    echo "<p class='txtcenter'>";
                     echo "<h3>Propriétés actuelles de $doc->nom :</h3>";
                     printf ('<label>Population : <input type="text" name="pop" value="%s"/></label></p>', $doc->pop);
-                    printf ('<p><label>Code postal : <input type="text" name="cp" value="%s"/></label></p>', $doc->cp); 
+                    $cplist = explode("-", $doc->cp);
+					$selected = '';
+				    print ("CP : ");
+					echo '<select name="Code postal">',"n";
+					foreach($cplist as $valeurHexadecimale => $nomCP)
+						{
+						echo "\t",'<option value="', $valeurHexadecimale ,'"', $selected ,'>', $nomCP ,'</option>',"\n";
+						$selected='';
+						}
+					echo '</select>',"\n";
 				    echo "</p>";
 				}
         } 
             
-
         // \AFFICHER VILLE
 if (isset($_POST['update'])) 
 	{
@@ -194,7 +211,6 @@ if (isset($_POST['update']))
 		 {
 						 die('Erreur de connexion au serveur MongoDB '.$ex->getMessage());
 		 }
-
 	}
        echo '</div>';
         
