@@ -45,7 +45,7 @@
                 
                 <div id="result" class="maxwidth">
                     <?php
-                        require_once("php/afficherVille.php");
+                        require_once("afficherVille.php");
                     ?>
                 </div>
                 

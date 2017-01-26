@@ -1,6 +1,6 @@
 <?php
 
-require_once("php/db.php");
+require_once("config_db_inc.php");
 
 try {
     
