@@ -32,7 +32,6 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
     
                 echo '<br>'.$_SESSION['id'].', vous avez les droits de modification en tant que '.$_SESSION['profil'].'.</br>';
               
-
         // INDEX 
         ?>
             <header class="maxwidth txtcenter">
@@ -62,7 +61,6 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
 
                 <?php
                 //AFFICHER VILLE
-    require_once("config_db_inc.php");
     try {
     
     if(isset($_POST["recherche"])&&$_POST["recherche"]=="Chercher") {
@@ -70,7 +68,6 @@ print ('<form action="" method="post"><fieldset><legend>Maintenance</legend>');
 		$ville = trim($_POST["ville"]);
 		$dept = trim($_POST["dept"]);
 		$region = trim($_POST["region"]);
-
         
 		if(preg_match("/^\p{L}/", $ville)) { // Si le nom de ville commence bien par un caractère, chinois ou non
 			if(!preg_match("/^\p{L}/", $region)) { // Si on a recherché un caractère dans region
@@ -158,47 +155,47 @@ catch (Exception $e) { echo "exception interceptée :".$e->getMessage();}
                 
 // Vérification de sélection d'une ville
                 
- if (isset($_GET['Ville'])) {
-        
-    
-            echo "TAAAAAAAAAAAAAAAAAAA MERE LA CHIENNE";
-
-			echo "Tu te calme Denis !";
-     
-            $ville = trim($_GET["Ville"]);
-            			$options = [];
+if (isset($_GET['Ville'])) {
+            $ville = floor($_GET["Ville"]);
+            $options = [];
 			$filter = ['_id' => $ville];
 			$query = new MongoDB\Driver\Query($filter,$options);
 			$curs = $cnx->executeQuery('geo_france.villes', $query);
-     
-            echo "<pre>";
-            print_r ($curs);
-            echo"</pre>";
-     
-			$cursArray = $curs->toArray();
-	
-            foreach($cursArray as $doc) {
+    		
+            foreach($curs as $doc) {
 				    echo "<p class='txtcenter'>";
-                    echo "<h3>Propriétés actuelles de $doc[nom] :</h3>";
-                    printf ('<label>Population : <input type="text" name="id" value="%s"/></label></p>', $doc->pop);
-                    printf ('<p><label>Code postal : <input type="text" name="id" value="%s"/></label></p>', $doc->cp); 
+                    echo "<h3>Propriétés actuelles de $doc->nom :</h3>";
+                    printf ('<label>Population : <input type="text" name="pop" value="%s"/></label></p>', $doc->pop);
+                    printf ('<p><label>Code postal : <input type="text" name="cp" value="%s"/></label></p>', $doc->cp); 
 				    echo "</p>";
 				}
-            
         } 
             
-  
 
-                
-                
-        
         // \AFFICHER VILLE
-        
+if (isset($_POST['update'])) {
+  print ("<h2>Modif ok</h2>");
+ 
+
+$bulk = new MongoDB\Driver\BulkWrite;
+$bulk->update(
+    ['_id' => $ville],
+    ['$set' => ['pop' => $_POST['pop'], 'cp'=> $_POST['cp']]],
+    ['multi' => false, 'upsert' => false]
+);
+//// OMFG    
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+$result = $cnx->executeBulkWrite('geo_france.villes', $bulk, $writeConcern);
+// ERREUR KK 
+
+
+  
+}
        echo '</div>';
         
       
 echo "<p>La modification de données sera répercutée dans la base de données !</p>";
-print('<p><input type="submit" value="Modifier les données" /><br>');
+print('<p><input type="submit" name="update" value="Modifier les données" /><br>');
 echo "Accès à l'<a href= 'index.php'>accueil</a><br>";
 print('<input type="submit" name="fin_session" value="Déconnexion" /></p>'); 
 print("</fieldset></form>");
